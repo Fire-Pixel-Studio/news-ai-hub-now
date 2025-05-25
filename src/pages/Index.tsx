@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
@@ -7,7 +6,7 @@ import ArticleCard from '@/components/ArticleCard';
 import TrendingNews from '@/components/TrendingNews';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Robot } from 'lucide-react';
+import { Bot } from 'lucide-react';
 
 const Index = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -120,7 +119,7 @@ const Index = () => {
         {/* AI Disclaimer */}
         <div className="mb-6 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
           <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
-            <Robot className="w-4 h-4" />
+            <Bot className="w-4 h-4" />
             <p className="text-sm opacity-80">
               Articles are automatically categorized by AI. Mistakes can happen - please verify important information.
             </p>
