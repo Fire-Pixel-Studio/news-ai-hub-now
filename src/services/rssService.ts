@@ -1,3 +1,4 @@
+
 export interface NewsArticle {
   id: string;
   title: string;
@@ -79,13 +80,13 @@ class RSSService {
             
             const category = this.inferCategory(title + ' ' + description);
             
-            // Fetch full article content from the link
-            const fullContent = await this.fetchFullArticleContent(link, description, title);
+            // Get the base content from RSS
+            const baseContent = this.stripHtml(description);
             
             return {
               id: `article-${allArticles.length + index}-${Date.now()}`,
               title,
-              description: fullContent,
+              description: baseContent,
               link,
               pubDate,
               image,
@@ -116,104 +117,6 @@ class RSSService {
       
       return this.articles;
     }
-  }
-
-  private async fetchFullArticleContent(articleUrl: string, fallbackDescription: string, title: string): Promise<string> {
-    try {
-      // Try to fetch the full article content
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(articleUrl)}`;
-      const response = await fetch(proxyUrl);
-      
-      if (response.ok) {
-        const data = await response.json();
-        const htmlContent = data.contents;
-        
-        // Parse the HTML and extract meaningful content
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlContent, 'text/html');
-        
-        // Remove unwanted elements
-        const unwantedSelectors = ['script', 'style', 'nav', 'footer', 'header', '.advertisement', '.ads', '.social-share'];
-        unwantedSelectors.forEach(selector => {
-          const elements = doc.querySelectorAll(selector);
-          elements.forEach(el => el.remove());
-        });
-        
-        // Try to find article content using common selectors
-        const contentSelectors = [
-          'article',
-          '.article-content',
-          '.post-content',
-          '.entry-content',
-          '.content',
-          '.story-body',
-          '.article-body',
-          'main p',
-          '.text'
-        ];
-        
-        let extractedContent = '';
-        
-        for (const selector of contentSelectors) {
-          const contentElement = doc.querySelector(selector);
-          if (contentElement) {
-            extractedContent = contentElement.textContent || '';
-            if (extractedContent.length > 200) {
-              break;
-            }
-          }
-        }
-        
-        // If we found good content, use it
-        if (extractedContent && extractedContent.length > 200) {
-          // Clean up the content
-          const cleanContent = extractedContent
-            .replace(/\s+/g, ' ')
-            .replace(/\n+/g, '\n')
-            .trim();
-          
-          return this.expandArticleContent(cleanContent, title);
-        }
-      }
-    } catch (error) {
-      console.log(`Could not fetch full content for article: ${articleUrl}`);
-    }
-    
-    // Fallback to expanded description
-    return this.expandArticleContent(this.stripHtml(fallbackDescription), title);
-  }
-
-  private expandArticleContent(description: string, title: string): string {
-    const cleanDescription = this.stripHtml(description);
-    
-    // Create comprehensive expanded content
-    const expandedContent = `${cleanDescription}
-
-This developing story continues to unfold as new information becomes available. Our newsroom is actively monitoring the situation and will provide comprehensive updates as they emerge from official sources and field correspondents.
-
-The broader implications of this development extend across multiple sectors and demographics. Industry analysts and subject matter experts are providing their insights on the potential short-term and long-term consequences of these events.
-
-Key developments to monitor:
-• The timing and context of this announcement signals significant changes ahead
-• Market reactions and stakeholder responses are being closely tracked
-• Regional and global implications are being assessed by policy experts
-• The ripple effects across related industries and communities are under review
-
-Our investigative team has been working around the clock to verify information from multiple independent sources. We are committed to providing accurate, balanced reporting that serves the public interest while maintaining the highest journalistic standards.
-
-This story represents a critical juncture that may influence future decisions and policies. The full scope of impact may not be immediately apparent, but early indicators suggest this will have lasting significance across multiple areas of public and private interest.
-
-Expert Analysis and Commentary:
-Leading authorities in the field have weighed in on these developments, offering professional perspectives that help contextualize the broader significance. Their analysis provides valuable insight into the technical, economic, and social dimensions of this evolving situation.
-
-The response from various stakeholders has been swift and varied, reflecting the complex nature of the issues at hand. Official statements, public reactions, and media coverage continue to shape the narrative as it develops.
-
-Looking Forward:
-As this situation continues to evolve, our commitment remains focused on delivering timely, accurate reporting that keeps our readers informed of all significant developments. We will continue to follow this story closely and provide updates as new information becomes available through our network of trusted sources and correspondents.
-
-The implications of these events will likely continue to unfold over the coming days and weeks. Our editorial team is prepared to provide comprehensive coverage and analysis as the story develops, ensuring our readers have access to the information they need to understand these important developments.`;
-
-    return expandedContent;
   }
 
   private extractImageFromDescription(description: string): string | null {

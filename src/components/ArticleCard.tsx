@@ -7,9 +7,10 @@ import { Badge } from '@/components/ui/badge';
 interface ArticleCardProps {
   article: NewsArticle;
   featured?: boolean;
+  onRelatedClick?: () => void;
 }
 
-const ArticleCard = ({ article, featured = false }: ArticleCardProps) => {
+const ArticleCard = ({ article, featured = false, onRelatedClick }: ArticleCardProps) => {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -26,9 +27,15 @@ const ArticleCard = ({ article, featured = false }: ArticleCardProps) => {
     return text.slice(0, limit) + '...';
   };
 
+  const handleClick = () => {
+    if (onRelatedClick) {
+      onRelatedClick();
+    }
+  };
+
   if (featured) {
     return (
-      <Link to={`/article/${encodeURIComponent(article.id)}`}>
+      <Link to={`/article/${encodeURIComponent(article.id)}`} onClick={handleClick}>
         <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer group">
           <div className="relative h-64 md:h-80 overflow-hidden">
             <img
@@ -64,7 +71,7 @@ const ArticleCard = ({ article, featured = false }: ArticleCardProps) => {
   }
 
   return (
-    <Link to={`/article/${encodeURIComponent(article.id)}`}>
+    <Link to={`/article/${encodeURIComponent(article.id)}`} onClick={handleClick}>
       <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer group h-full">
         <div className="relative h-48 overflow-hidden">
           <img

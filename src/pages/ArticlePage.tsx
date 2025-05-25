@@ -71,6 +71,10 @@ const ArticlePage = () => {
     });
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -168,7 +172,11 @@ const ArticlePage = () => {
             <h2 className="text-2xl font-playfair font-bold mb-6">Related Articles</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedArticles.map((relatedArticle) => (
-                <ArticleCard key={relatedArticle.id} article={relatedArticle} />
+                <ArticleCard 
+                  key={relatedArticle.id} 
+                  article={relatedArticle} 
+                  onRelatedClick={scrollToTop}
+                />
               ))}
             </div>
           </section>
