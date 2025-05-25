@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Facebook, X, Linkedin } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -27,17 +27,14 @@ const ArticlePage = () => {
     try {
       setLoading(true);
       
-      // First, ensure articles are loaded
       await rssService.fetchArticles();
       
-      // Get the specific article
       const decodedId = decodeURIComponent(id);
       const foundArticle = rssService.getArticleById(decodedId);
       
       if (foundArticle) {
         setArticle(foundArticle);
         
-        // Get related articles
         const related = rssService.getRelatedArticles(foundArticle, 3);
         setRelatedArticles(related);
       } else {
@@ -60,7 +57,6 @@ const ArticlePage = () => {
   };
 
   const handleSearch = (query: string) => {
-    // Handle search from header
     console.log('Search query:', query);
   };
 
@@ -75,39 +71,14 @@ const ArticlePage = () => {
     });
   };
 
-  const shareArticle = (platform: string) => {
-    if (!article) return;
-    
-    const url = window.location.href;
-    const title = article.title;
-    
-    let shareUrl = '';
-    
-    switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-        break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
-        break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-        break;
-    }
-    
-    if (shareUrl) {
-      window.open(shareUrl, '_blank', 'width=600,height=400');
-    }
-  };
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Header onSearch={handleSearch} />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading article...</p>
+            <p className="text-muted-foreground">Loading article...</p>
           </div>
         </div>
       </div>
@@ -116,12 +87,12 @@ const ArticlePage = () => {
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Header onSearch={handleSearch} />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center">
             <h1 className="text-2xl font-playfair font-bold mb-4">Article Not Found</h1>
-            <p className="text-gray-600 mb-4">The requested article could not be found.</p>
+            <p className="text-muted-foreground mb-4">The requested article could not be found.</p>
             <Link to="/">
               <Button>
                 <ArrowLeft className="w-4 h-4 mr-2" />
@@ -136,7 +107,7 @@ const ArticlePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header onSearch={handleSearch} />
       
       <main className="container mx-auto px-4 py-8">
@@ -144,7 +115,7 @@ const ArticlePage = () => {
           {/* Back Button */}
           <div className="mb-6">
             <Link to="/">
-              <Button variant="ghost" className="hover:bg-gray-100">
+              <Button variant="ghost" className="hover:bg-accent">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to News
               </Button>
@@ -154,7 +125,7 @@ const ArticlePage = () => {
           {/* Article Header */}
           <header className="mb-8">
             {article.category && (
-              <Badge variant="secondary" className="mb-4 bg-primary text-white">
+              <Badge variant="secondary" className="mb-4 bg-primary text-primary-foreground">
                 {article.category}
               </Badge>
             )}
@@ -163,42 +134,8 @@ const ArticlePage = () => {
               {article.title}
             </h1>
             
-            <div className="flex flex-wrap items-center gap-4 text-gray-600 mb-6">
-              <span className="font-medium">{article.source}</span>
-              <span>•</span>
+            <div className="flex flex-wrap items-center gap-4 text-muted-foreground mb-6">
               <time>{formatDate(article.pubDate)}</time>
-            </div>
-
-            {/* Social Share Buttons */}
-            <div className="flex items-center space-x-4 mb-8">
-              <span className="text-sm font-medium text-gray-600">Share:</span>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => shareArticle('facebook')}
-                className="hover:bg-blue-50 hover:border-blue-200"
-              >
-                <Facebook className="w-4 h-4 mr-2" />
-                Facebook
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => shareArticle('twitter')}
-                className="hover:bg-gray-50 hover:border-gray-300"
-              >
-                <X className="w-4 h-4 mr-2" />
-                Twitter
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => shareArticle('linkedin')}
-                className="hover:bg-blue-50 hover:border-blue-200"
-              >
-                <Linkedin className="w-4 h-4 mr-2" />
-                LinkedIn
-              </Button>
             </div>
           </header>
 
@@ -219,23 +156,9 @@ const ArticlePage = () => {
 
           {/* Article Content */}
           <div className="prose prose-lg max-w-none mb-12">
-            <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+            <div className="text-foreground leading-relaxed whitespace-pre-line text-lg">
               {article.description}
             </div>
-            
-            {article.link && article.link !== '#' && (
-              <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm text-gray-600 mb-2">Read the full article at the source:</p>
-                <a
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline font-medium"
-                >
-                  {article.link}
-                </a>
-              </div>
-            )}
           </div>
         </article>
 

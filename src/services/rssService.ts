@@ -7,11 +7,18 @@ export interface NewsArticle {
   pubDate: string;
   image?: string;
   category?: string;
-  source?: string;
 }
 
 class RSSService {
-  private readonly RSS_URL = 'https://rss.app/feeds/nstitSYRKm5Tvcz6.xml';
+  private readonly RSS_FEEDS = [
+    'https://rss.app/feeds/tYeOiikyGXfWqnbe.xml',
+    'https://rss.app/feeds/ByNJXo54490NwHzf.xml',
+    'https://rss.app/feeds/s0vj5G7s0NNCwizk.xml',
+    'https://rss.app/feeds/tezEEccrbPGZzPY1.xml',
+    'https://rss.app/feeds/tup0DiNf3fuWjeOx.xml',
+    'https://rss.app/feeds/tjObKSnyEeJJulnM.xml'
+  ];
+  
   private articles: NewsArticle[] = [];
   private lastFetched: number = 0;
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
@@ -19,83 +26,88 @@ class RSSService {
   async fetchArticles(): Promise<NewsArticle[]> {
     const now = Date.now();
     
-    // Return cached articles if they're still fresh
     if (this.articles.length > 0 && (now - this.lastFetched) < this.CACHE_DURATION) {
       return this.articles;
     }
 
     try {
-      console.log('Fetching RSS feed...');
+      console.log('Fetching RSS feeds...');
       
-      // Use a CORS proxy to fetch the RSS feed
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(this.RSS_URL)}`;
-      const response = await fetch(proxyUrl);
+      const allArticles: NewsArticle[] = [];
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      const xmlText = data.contents;
-      
-      // Parse XML
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
-      
-      // Check for parsing errors
-      const parseError = xmlDoc.querySelector('parsererror');
-      if (parseError) {
-        throw new Error('Failed to parse RSS XML');
-      }
-      
-      // Extract articles from RSS items
-      const items = xmlDoc.querySelectorAll('item');
-      console.log(`Found ${items.length} articles in RSS feed`);
-      
-      this.articles = Array.from(items).map((item, index) => {
-        const title = item.querySelector('title')?.textContent || 'Untitled';
-        const description = item.querySelector('description')?.textContent || '';
-        const link = item.querySelector('link')?.textContent || '';
-        const pubDate = item.querySelector('pubDate')?.textContent || new Date().toISOString();
-        
-        // Try to extract image from description or use a placeholder
-        let image = this.extractImageFromDescription(description);
-        if (!image) {
-          // Use Unsplash placeholder images for news
-          const newsImages = [
-            'photo-1504711434969-e33886168f5c', // newspaper
-            'photo-1586953208448-b95a79798f07', // breaking news
-            'photo-1495020689067-958852a7765e', // news stand
-            'photo-1594736797933-d0e501ba2fe6', // newsletter
-            'photo-1507003211169-0a1dd7228f2d' // news reading
-          ];
-          const randomImage = newsImages[index % newsImages.length];
-          image = `https://images.unsplash.com/${randomImage}?w=800&h=400&fit=crop`;
+      for (const feedUrl of this.RSS_FEEDS) {
+        try {
+          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(feedUrl)}`;
+          const response = await fetch(proxyUrl);
+          
+          if (!response.ok) {
+            console.warn(`Failed to fetch feed: ${feedUrl}`);
+            continue;
+          }
+          
+          const data = await response.json();
+          const xmlText = data.contents;
+          
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+          
+          const parseError = xmlDoc.querySelector('parsererror');
+          if (parseError) {
+            console.warn(`Failed to parse feed: ${feedUrl}`);
+            continue;
+          }
+          
+          const items = xmlDoc.querySelectorAll('item');
+          
+          const feedArticles = Array.from(items).map((item, index) => {
+            const title = item.querySelector('title')?.textContent || 'Untitled';
+            const description = item.querySelector('description')?.textContent || '';
+            const link = item.querySelector('link')?.textContent || '';
+            const pubDate = item.querySelector('pubDate')?.textContent || new Date().toISOString();
+            
+            let image = this.extractImageFromDescription(description);
+            if (!image) {
+              const newsImages = [
+                'photo-1504711434969-e33886168f5c',
+                'photo-1586953208448-b95a79798f07',
+                'photo-1495020689067-958852a7765e',
+                'photo-1594736797933-d0e501ba2fe6',
+                'photo-1507003211169-0a1dd7228f2d'
+              ];
+              const randomImage = newsImages[(index + allArticles.length) % newsImages.length];
+              image = `https://images.unsplash.com/${randomImage}?w=800&h=400&fit=crop`;
+            }
+            
+            const category = this.inferCategory(title + ' ' + description);
+            
+            return {
+              id: `article-${allArticles.length + index}-${Date.now()}`,
+              title,
+              description: this.stripHtml(description),
+              link,
+              pubDate,
+              image,
+              category
+            };
+          });
+          
+          allArticles.push(...feedArticles);
+        } catch (error) {
+          console.error(`Error fetching feed ${feedUrl}:`, error);
         }
-        
-        // Try to infer category from title or description
-        const category = this.inferCategory(title + ' ' + description);
-        
-        return {
-          id: `article-${index}-${Date.now()}`,
-          title,
-          description: this.stripHtml(description),
-          link,
-          pubDate,
-          image,
-          category,
-          source: 'RSS Feed'
-        };
-      });
+      }
       
+      // Sort by publication date (newest first)
+      allArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+      
+      this.articles = allArticles;
       this.lastFetched = now;
-      console.log(`Successfully parsed ${this.articles.length} articles`);
+      console.log(`Successfully fetched ${this.articles.length} articles from ${this.RSS_FEEDS.length} feeds`);
       return this.articles;
       
     } catch (error) {
-      console.error('Error fetching RSS feed:', error);
+      console.error('Error fetching RSS feeds:', error);
       
-      // Return demo articles if RSS fails
       if (this.articles.length === 0) {
         this.articles = this.getDemoArticles();
       }
@@ -105,7 +117,6 @@ class RSSService {
   }
 
   private extractImageFromDescription(description: string): string | null {
-    // Try to find image URLs in the description
     const imgRegex = /<img[^>]+src="([^">]+)"/;
     const match = description.match(imgRegex);
     return match ? match[1] : null;
@@ -120,21 +131,17 @@ class RSSService {
   private inferCategory(text: string): string {
     const lowerText = text.toLowerCase();
     
-    if (lowerText.includes('tech') || lowerText.includes('ai') || lowerText.includes('software') || lowerText.includes('digital')) {
+    if (lowerText.includes('tech') || lowerText.includes('ai') || lowerText.includes('software') || lowerText.includes('digital') || lowerText.includes('computer') || lowerText.includes('internet')) {
       return 'Technology';
-    } else if (lowerText.includes('sport') || lowerText.includes('football') || lowerText.includes('game')) {
+    } else if (lowerText.includes('sport') || lowerText.includes('football') || lowerText.includes('basketball') || lowerText.includes('soccer') || lowerText.includes('game') || lowerText.includes('team') || lowerText.includes('player')) {
       return 'Sports';
-    } else if (lowerText.includes('business') || lowerText.includes('economy') || lowerText.includes('market')) {
+    } else if (lowerText.includes('business') || lowerText.includes('economy') || lowerText.includes('market') || lowerText.includes('finance') || lowerText.includes('company') || lowerText.includes('stock') || lowerText.includes('trade')) {
       return 'Business';
-    } else if (lowerText.includes('health') || lowerText.includes('medical') || lowerText.includes('wellness')) {
+    } else if (lowerText.includes('health') || lowerText.includes('medical') || lowerText.includes('wellness') || lowerText.includes('hospital') || lowerText.includes('doctor') || lowerText.includes('medicine') || lowerText.includes('fitness')) {
       return 'Health';
-    } else if (lowerText.includes('entertainment') || lowerText.includes('movie') || lowerText.includes('music')) {
-      return 'Entertainment';
-    } else if (lowerText.includes('politic') || lowerText.includes('government') || lowerText.includes('election')) {
-      return 'Politics';
     }
     
-    return 'General';
+    return 'Home';
   }
 
   private getDemoArticles(): NewsArticle[] {
@@ -146,18 +153,16 @@ class RSSService {
         link: '#',
         pubDate: new Date().toISOString(),
         image: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=800&h=400&fit=crop',
-        category: 'Technology',
-        source: 'Demo News'
+        category: 'Technology'
       },
       {
         id: 'demo-2',
-        title: 'Global Climate Summit Reaches Historic Agreement',
-        description: 'World leaders have reached a historic agreement on climate action during the latest global summit...',
+        title: 'Global Business Markets Show Strong Growth',
+        description: 'International markets have shown unprecedented growth this quarter, with technology stocks leading the surge...',
         link: '#',
         pubDate: new Date(Date.now() - 3600000).toISOString(),
         image: 'https://images.unsplash.com/photo-1569163139394-de4e5f43e4e3?w=800&h=400&fit=crop',
-        category: 'Politics',
-        source: 'Demo News'
+        category: 'Business'
       },
       {
         id: 'demo-3',
@@ -166,15 +171,13 @@ class RSSService {
         link: '#',
         pubDate: new Date(Date.now() - 7200000).toISOString(),
         image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop',
-        category: 'Health',
-        source: 'Demo News'
+        category: 'Health'
       }
     ];
   }
 
   getCategories(): string[] {
-    const categories = [...new Set(this.articles.map(article => article.category))];
-    return categories.filter(Boolean) as string[];
+    return ['Home', 'Technology', 'Business', 'Sports', 'Health'];
   }
 
   searchArticles(query: string): NewsArticle[] {
@@ -186,6 +189,9 @@ class RSSService {
   }
 
   getArticlesByCategory(category: string): NewsArticle[] {
+    if (category === 'Home') {
+      return this.articles;
+    }
     return this.articles.filter(article => article.category === category);
   }
 

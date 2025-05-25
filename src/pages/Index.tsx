@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
@@ -85,12 +84,12 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-background">
         <Header onSearch={handleSearch} />
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading latest news...</p>
+            <p className="text-muted-foreground">Loading latest news...</p>
           </div>
         </div>
       </div>
@@ -98,7 +97,7 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       <Header onSearch={handleSearch} />
       
       <main className="container mx-auto px-4 py-8">
@@ -108,10 +107,10 @@ const Index = () => {
             {/* Search Results Header */}
             {searchQuery && (
               <div className="mb-6">
-                <h2 className="text-2xl font-playfair font-bold mb-2">
+                <h2 className="text-2xl font-playfair font-bold mb-2 text-foreground">
                   Search Results for "{searchQuery}"
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-muted-foreground">
                   Found {filteredArticles.length} article{filteredArticles.length !== 1 ? 's' : ''}
                 </p>
               </div>
@@ -120,20 +119,20 @@ const Index = () => {
             {/* Featured Article */}
             {featuredArticle && !searchQuery && (
               <div className="mb-8">
-                <h2 className="text-2xl font-playfair font-bold mb-4">Featured Story</h2>
+                <h2 className="text-2xl font-playfair font-bold mb-4 text-foreground">Featured Story</h2>
                 <ArticleCard article={featuredArticle} featured={true} />
               </div>
             )}
 
             {/* Articles Grid */}
             <div className="mb-8">
-              <h2 className="text-2xl font-playfair font-bold mb-6">
+              <h2 className="text-2xl font-playfair font-bold mb-6 text-foreground">
                 {searchQuery ? 'Search Results' : 'Latest News'}
               </h2>
               
               {displayedArticles.length === 0 ? (
                 <div className="text-center py-12">
-                  <p className="text-gray-600 text-lg">
+                  <p className="text-muted-foreground text-lg">
                     {searchQuery ? 'No articles found for your search.' : 'No articles available at the moment.'}
                   </p>
                 </div>
