@@ -16,8 +16,7 @@ const Footer = () => {
               <span className="text-xl font-playfair font-bold">NewsHub</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md">
-              Your go-to source for the latest news, automatically curated from trusted sources. 
-              Stay informed with breaking news, analysis, and trending stories.
+              Articles are automatically categorized by AI. Mistakes can happen - please verify important information.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-300 hover:text-primary transition-colors">

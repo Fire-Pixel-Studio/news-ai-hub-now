@@ -27,13 +27,19 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     localStorage.setItem('theme', theme);
     
-    // Remove all theme classes
-    document.documentElement.classList.remove(
-      'light', 'dark', 'light-fancy', 'dark-fancy', 'light-modern', 'dark-modern'
-    );
+    // Remove all theme classes from both html and body
+    const classList = ['light', 'dark', 'light-fancy', 'dark-fancy', 'light-modern', 'dark-modern'];
+    classList.forEach(cls => {
+      document.documentElement.classList.remove(cls);
+      document.body.classList.remove(cls);
+    });
     
-    // Add current theme class
+    // Add current theme class to both html and body
     document.documentElement.classList.add(theme);
+    document.body.classList.add(theme);
+    
+    // Set the data-theme attribute for better CSS targeting
+    document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
   return (

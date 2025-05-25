@@ -51,7 +51,7 @@ const ArticleCard = ({ article, featured = false }: ArticleCardProps) => {
                 {article.title}
               </h1>
               <p className="text-gray-200 mb-2 line-clamp-2">
-                {truncateText(article.description, 150)}
+                {truncateText(article.description, 250)}
               </p>
               <p className="text-sm text-gray-300">
                 {formatDate(article.pubDate)}
@@ -87,7 +87,7 @@ const ArticleCard = ({ article, featured = false }: ArticleCardProps) => {
             {article.title}
           </h3>
           <p className="text-gray-600 text-sm mb-3 line-clamp-3">
-            {truncateText(article.description, 120)}
+            {truncateText(article.description, 200)}
           </p>
           <div className="flex justify-between items-center text-xs text-gray-500">
             <span>{formatDate(article.pubDate)}</span>
