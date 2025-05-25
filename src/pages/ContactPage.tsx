@@ -10,10 +10,17 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Starry background */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="stars"></div>
+        <div className="stars2"></div>
+        <div className="stars3"></div>
+      </div>
+      
       <Header onSearch={handleSearch} />
       
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto text-center">
           <Card className="bg-card border border-border">
             <CardHeader>
@@ -21,7 +28,7 @@ const ContactPage = () => {
                 <Construction className="w-16 h-16 text-primary" />
               </div>
               <CardTitle className="text-3xl font-playfair font-bold text-foreground">
-                Under Maintenance
+                Page Under Update
               </CardTitle>
             </CardHeader>
             <CardContent>

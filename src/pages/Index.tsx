@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
@@ -6,6 +7,7 @@ import ArticleCard from '@/components/ArticleCard';
 import TrendingNews from '@/components/TrendingNews';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { Robot } from 'lucide-react';
 
 const Index = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -14,7 +16,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [articlesPerPage] = useState(6);
+  const [articlesPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const { toast } = useToast();
 
@@ -84,9 +86,16 @@ const Index = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        {/* Starry background */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+        </div>
+        
         <Header onSearch={handleSearch} />
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center min-h-screen relative z-10">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
             <p className="text-muted-foreground">Loading latest news...</p>
@@ -97,13 +106,38 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Starry background */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="stars"></div>
+        <div className="stars2"></div>
+        <div className="stars3"></div>
+      </div>
+      
       <Header onSearch={handleSearch} />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 relative z-10">
+        {/* AI Disclaimer */}
+        <div className="mb-6 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+          <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
+            <Robot className="w-4 h-4" />
+            <p className="text-sm opacity-80">
+              Articles are automatically categorized by AI. Mistakes can happen - please verify important information.
+            </p>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-3">
+            {/* Article Count */}
+            <div className="mb-4">
+              <p className="text-sm text-muted-foreground">
+                Total articles: <span className="font-semibold text-foreground">{filteredArticles.length}</span>
+                {searchQuery && ` (filtered for "${searchQuery}")`}
+              </p>
+            </div>
+
             {/* Search Results Header */}
             {searchQuery && (
               <div className="mb-6">
