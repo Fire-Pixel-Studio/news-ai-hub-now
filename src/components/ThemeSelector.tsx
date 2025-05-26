@@ -63,6 +63,33 @@ const themeGroups = [
       { value: 'dark-sunset' as Theme, label: 'Sunset Dark', preview: 'bg-gradient-to-r from-gray-900 to-purple-900 border-orange-700' },
       { value: 'forest' as Theme, label: 'Forest Light', preview: 'bg-gradient-to-r from-green-400 to-emerald-500 border-green-300' },
       { value: 'dark-forest' as Theme, label: 'Forest Dark', preview: 'bg-gradient-to-r from-gray-900 to-green-900 border-green-700' },
+      { value: 'tropical' as Theme, label: 'Tropical', preview: 'bg-gradient-to-r from-lime-400 to-emerald-500 border-lime-300' },
+      { value: 'dark-tropical' as Theme, label: 'Dark Tropical', preview: 'bg-gradient-to-r from-emerald-900 to-teal-900 border-emerald-700' },
+    ]
+  },
+  {
+    label: 'Seasons',
+    themes: [
+      { value: 'autumn' as Theme, label: 'Autumn', preview: 'bg-gradient-to-r from-orange-600 to-red-600 border-orange-400' },
+      { value: 'dark-autumn' as Theme, label: 'Dark Autumn', preview: 'bg-gradient-to-r from-orange-900 to-red-900 border-orange-700' },
+      { value: 'winter' as Theme, label: 'Winter', preview: 'bg-gradient-to-r from-blue-200 to-cyan-200 border-blue-300' },
+      { value: 'dark-winter' as Theme, label: 'Dark Winter', preview: 'bg-gradient-to-r from-slate-800 to-blue-900 border-slate-600' },
+    ]
+  },
+  {
+    label: 'Futuristic',
+    themes: [
+      { value: 'neon-city' as Theme, label: 'Neon City', preview: 'bg-gradient-to-r from-pink-400 to-cyan-400 border-pink-300' },
+      { value: 'dark-neon-city' as Theme, label: 'Dark Neon City', preview: 'bg-gradient-to-r from-pink-900 to-cyan-900 border-pink-700' },
+      { value: 'cyberpunk' as Theme, label: 'Cyberpunk', preview: 'bg-gradient-to-r from-purple-500 to-pink-500 border-purple-400' },
+      { value: 'dark-cyberpunk' as Theme, label: 'Dark Cyberpunk', preview: 'bg-gradient-to-r from-purple-900 to-pink-900 border-purple-700' },
+    ]
+  },
+  {
+    label: 'Volcanic',
+    themes: [
+      { value: 'volcanic' as Theme, label: 'Volcanic', preview: 'bg-gradient-to-r from-red-600 to-orange-600 border-red-400' },
+      { value: 'dark-volcanic' as Theme, label: 'Dark Volcanic', preview: 'bg-gradient-to-r from-red-900 to-yellow-900 border-red-700' },
     ]
   },
   {

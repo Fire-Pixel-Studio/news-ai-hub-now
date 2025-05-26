@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -74,6 +74,15 @@ const ArticlePage = () => {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const formatUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname.replace('www.', '');
+    } catch {
+      return url;
+    }
   };
 
   const getThemeAnimations = () => {
@@ -190,6 +199,10 @@ const ArticlePage = () => {
             
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground mb-6">
               <time>{formatDate(article.pubDate)}</time>
+              <div className="flex items-center gap-1 text-sm opacity-70">
+                <ExternalLink className="w-4 h-4" />
+                <span>Source: {formatUrl(article.link)}</span>
+              </div>
             </div>
           </header>
 
@@ -209,9 +222,25 @@ const ArticlePage = () => {
           )}
 
           {/* Article Content */}
-          <div className="prose prose-lg max-w-none mb-12">
+          <div className="prose prose-lg max-w-none mb-8">
             <div className="text-foreground leading-relaxed whitespace-pre-line text-lg">
               {article.description}
+            </div>
+          </div>
+
+          {/* Source Link */}
+          <div className="mb-12 p-4 bg-muted rounded-lg">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-muted-foreground">Read the full article at the source:</span>
+              <a
+                href={article.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
+              >
+                <ExternalLink className="w-4 h-4" />
+                <span className="font-medium">{formatUrl(article.link)}</span>
+              </a>
             </div>
           </div>
         </article>

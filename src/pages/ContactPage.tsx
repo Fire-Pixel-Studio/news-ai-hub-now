@@ -3,19 +3,59 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Construction } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const ContactPage = () => {
+  const { theme } = useTheme();
+
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
   };
 
-  return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Starry background */}
-      <div className="absolute inset-0 opacity-30">
+  const getThemeAnimations = () => {
+    if (theme === 'night-sky' || theme === 'dark' || theme.includes('dark')) {
+      return (
+        <>
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+        </>
+      );
+    }
+    
+    if (theme === 'day-sky') {
+      return <div className="clouds"></div>;
+    }
+    
+    if (theme === 'solar-system') {
+      return <div className="planets"></div>;
+    }
+    
+    if (theme === 'galaxy') {
+      return (
+        <>
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+          <div className="galaxy-spiral"></div>
+        </>
+      );
+    }
+    
+    return (
+      <>
         <div className="stars"></div>
         <div className="stars2"></div>
         <div className="stars3"></div>
+      </>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 opacity-30">
+        {getThemeAnimations()}
       </div>
       
       <Header onSearch={handleSearch} />
