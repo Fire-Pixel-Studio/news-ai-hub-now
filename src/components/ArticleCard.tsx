@@ -28,6 +28,7 @@ const ArticleCard = ({ article, featured = false, onRelatedClick }: ArticleCardP
   };
 
   const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (onRelatedClick) {
       onRelatedClick();
     }

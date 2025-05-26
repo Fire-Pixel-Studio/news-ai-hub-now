@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
@@ -6,7 +7,6 @@ import ArticleCard from '@/components/ArticleCard';
 import TrendingNews from '@/components/TrendingNews';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { Bot } from 'lucide-react';
 
 const Index = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -15,7 +15,7 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [articlesPerPage] = useState(20);
+  const [articlesPerPage] = useState(200);
   const [currentPage, setCurrentPage] = useState(1);
   const { toast } = useToast();
 
@@ -116,16 +116,6 @@ const Index = () => {
       <Header onSearch={handleSearch} />
       
       <main className="container mx-auto px-4 py-8 relative z-10">
-        {/* AI Disclaimer */}
-        <div className="mb-6 p-3 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-          <div className="flex items-center gap-2 text-yellow-800 dark:text-yellow-200">
-            <Bot className="w-4 h-4" />
-            <p className="text-sm opacity-80">
-              Articles are automatically categorized by AI. Mistakes can happen - please verify important information.
-            </p>
-          </div>
-        </div>
-
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-3">

@@ -134,9 +134,13 @@ class RSSService {
   private inferCategory(text: string): string {
     const lowerText = text.toLowerCase();
     
-    if (lowerText.includes('tech') || lowerText.includes('ai') || lowerText.includes('software') || lowerText.includes('digital') || lowerText.includes('computer') || lowerText.includes('internet') || lowerText.includes('cyber') || lowerText.includes('innovation') || lowerText.includes('startup')) {
+    if (lowerText.includes('game') || lowerText.includes('gaming') || lowerText.includes('xbox') || lowerText.includes('playstation') || lowerText.includes('nintendo') || lowerText.includes('esports') || lowerText.includes('video game') || lowerText.includes('pc gaming') || lowerText.includes('steam')) {
+      return 'Games';
+    } else if (lowerText.includes('world') || lowerText.includes('international') || lowerText.includes('global') || lowerText.includes('country') || lowerText.includes('nation') || lowerText.includes('war') || lowerText.includes('conflict') || lowerText.includes('diplomacy') || lowerText.includes('politics')) {
+      return 'World News';
+    } else if (lowerText.includes('tech') || lowerText.includes('ai') || lowerText.includes('software') || lowerText.includes('digital') || lowerText.includes('computer') || lowerText.includes('internet') || lowerText.includes('cyber') || lowerText.includes('innovation') || lowerText.includes('startup')) {
       return 'Technology';
-    } else if (lowerText.includes('sport') || lowerText.includes('football') || lowerText.includes('basketball') || lowerText.includes('soccer') || lowerText.includes('game') || lowerText.includes('team') || lowerText.includes('player') || lowerText.includes('match') || lowerText.includes('championship') || lowerText.includes('league')) {
+    } else if (lowerText.includes('sport') || lowerText.includes('football') || lowerText.includes('basketball') || lowerText.includes('soccer') || lowerText.includes('team') || lowerText.includes('player') || lowerText.includes('match') || lowerText.includes('championship') || lowerText.includes('league')) {
       return 'Sports';
     } else if (lowerText.includes('business') || lowerText.includes('economy') || lowerText.includes('market') || lowerText.includes('finance') || lowerText.includes('company') || lowerText.includes('stock') || lowerText.includes('trade') || lowerText.includes('investment') || lowerText.includes('revenue') || lowerText.includes('profit')) {
       return 'Business';
@@ -180,7 +184,7 @@ class RSSService {
   }
 
   getCategories(): string[] {
-    return ['Home', 'Technology', 'Business', 'Sports', 'Health'];
+    return ['Home', 'Technology', 'Business', 'Sports', 'Health', 'Games', 'World News'];
   }
 
   searchArticles(query: string): NewsArticle[] {
