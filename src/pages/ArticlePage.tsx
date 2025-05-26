@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -9,6 +8,7 @@ import ArticleCard from '@/components/ArticleCard';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const ArticlePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,6 +16,7 @@ const ArticlePage = () => {
   const [relatedArticles, setRelatedArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { theme } = useTheme();
 
   useEffect(() => {
     loadArticle();
@@ -75,11 +76,53 @@ const ArticlePage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const getThemeAnimations = () => {
+    if (theme === 'night-sky' || theme === 'dark' || theme.includes('dark')) {
+      return (
+        <>
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+        </>
+      );
+    }
+    
+    if (theme === 'day-sky') {
+      return <div className="clouds"></div>;
+    }
+    
+    if (theme === 'solar-system') {
+      return <div className="planets"></div>;
+    }
+    
+    if (theme === 'galaxy') {
+      return (
+        <>
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+          <div className="galaxy-spiral"></div>
+        </>
+      );
+    }
+    
+    return (
+      <>
+        <div className="stars"></div>
+        <div className="stars2"></div>
+        <div className="stars3"></div>
+      </>
+    );
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          {getThemeAnimations()}
+        </div>
         <Header onSearch={handleSearch} />
-        <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center justify-center min-h-screen relative z-10">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
             <p className="text-muted-foreground">Loading article...</p>
@@ -91,9 +134,12 @@ const ArticlePage = () => {
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          {getThemeAnimations()}
+        </div>
         <Header onSearch={handleSearch} />
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 py-8 relative z-10">
           <div className="text-center">
             <h1 className="text-2xl font-playfair font-bold mb-4">Article Not Found</h1>
             <p className="text-muted-foreground mb-4">The requested article could not be found.</p>
@@ -111,10 +157,14 @@ const ArticlePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      <div className="absolute inset-0 opacity-30">
+        {getThemeAnimations()}
+      </div>
+      
       <Header onSearch={handleSearch} />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 relative z-10">
         <article className="max-w-4xl mx-auto">
           {/* Back Button */}
           <div className="mb-6">

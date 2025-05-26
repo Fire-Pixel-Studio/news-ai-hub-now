@@ -51,8 +51,7 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
-  /* ... keep existing code (light-fancy, dark-fancy, light-modern, dark-modern, ocean, dark-ocean, sunset, dark-sunset, forest, dark-forest themes) */
-
+  /* Enhanced Themes */
   .light-fancy {
     --background: 214 100% 98%;
     --foreground: 222.2 84% 4.9%;
@@ -203,7 +202,6 @@
     --input: 120 30% 18%;
   }
 
-  /* New Themes */
   .day-sky {
     --background: 195 100% 95%;
     --foreground: 195 50% 10%;
@@ -396,8 +394,6 @@
     --input: 210 20% 15%;
   }
 
-  /* ... keep existing code (blue, purple, green themes) */
-
   .blue {
     --background: 214 100% 97%;
     --foreground: 214 50% 10%;
@@ -441,9 +437,7 @@
   }
 }
 
-/* ... keep existing code (starry background animation) */
-
-/* Starry background animation */
+/* Animated backgrounds */
 .stars, .stars2, .stars3 {
   position: absolute;
   top: 0;
@@ -483,6 +477,89 @@
 @keyframes stars-move {
   0% { transform: translateY(0); }
   100% { transform: translateY(-100vh); }
+}
+
+/* Planets animation for solar system theme */
+.planets {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.planets::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #ff6b35, #f7931e);
+  border-radius: 50%;
+  top: 10%;
+  left: 20%;
+  animation: planet-orbit 30s linear infinite;
+}
+
+.planets::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: radial-gradient(circle, #4ecdc4, #44a08d);
+  border-radius: 50%;
+  top: 60%;
+  right: 30%;
+  animation: planet-orbit 45s linear infinite reverse;
+}
+
+@keyframes planet-orbit {
+  0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+}
+
+/* Clouds animation for day sky theme */
+.clouds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M20 10c0-5.5-4.5-10-10-10S0 4.5 0 10s4.5 10 10 10 10-4.5 10-10zm60 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z' fill='white' opacity='0.3'/%3E%3C/svg%3E") repeat-x;
+  background-size: 300px 100px;
+  animation: clouds-move 60s linear infinite;
+}
+
+@keyframes clouds-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-300px); }
+}
+
+/* Galaxy spiral animation */
+.galaxy-spiral {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.galaxy-spiral::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(from 0deg, transparent, rgba(147, 197, 253, 0.3), transparent);
+  border-radius: 50%;
+  animation: galaxy-spin 20s linear infinite;
+}
+
+@keyframes galaxy-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Enhanced Dark theme stars for all dark themes */
@@ -635,29 +712,8 @@
     @apply font-playfair;
   }
 
-  /* Enhanced text visibility in all dark themes */
+  /* Force correct text colors in all dark themes */
   .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy {
-    .text-gray-600 {
-      @apply text-muted-foreground;
-    }
-    
-    .text-gray-500 {
-      @apply text-muted-foreground;
-    }
-    
-    .text-gray-400 {
-      @apply text-muted-foreground;
-    }
-    
-    .text-gray-300 {
-      @apply text-card-foreground;
-    }
-    
-    .text-gray-200 {
-      @apply text-card-foreground;
-    }
-
-    /* Force white text for better visibility */
     * {
       color: hsl(var(--foreground)) !important;
     }
@@ -668,6 +724,14 @@
 
     .text-primary {
       color: hsl(var(--primary)) !important;
+    }
+
+    .text-gray-600, .text-gray-500, .text-gray-400 {
+      color: hsl(var(--muted-foreground)) !important;
+    }
+
+    .text-gray-300, .text-gray-200 {
+      color: hsl(var(--card-foreground)) !important;
     }
   }
 }

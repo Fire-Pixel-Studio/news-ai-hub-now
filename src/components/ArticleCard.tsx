@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { NewsArticle } from '@/services/rssService';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ExternalLink } from 'lucide-react';
 
 interface ArticleCardProps {
   article: NewsArticle;
@@ -34,6 +35,15 @@ const ArticleCard = ({ article, featured = false, onRelatedClick }: ArticleCardP
     }
   };
 
+  const formatUrl = (url: string) => {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.hostname.replace('www.', '');
+    } catch {
+      return url;
+    }
+  };
+
   if (featured) {
     return (
       <Link to={`/article/${encodeURIComponent(article.id)}`} onClick={handleClick}>
@@ -61,9 +71,15 @@ const ArticleCard = ({ article, featured = false, onRelatedClick }: ArticleCardP
               <p className="text-gray-200 mb-2 line-clamp-2">
                 {truncateText(article.description, 250)}
               </p>
-              <p className="text-sm text-gray-300">
-                {formatDate(article.pubDate)}
-              </p>
+              <div className="flex items-center justify-between">
+                <p className="text-sm text-gray-300">
+                  {formatDate(article.pubDate)}
+                </p>
+                <div className="flex items-center gap-1 text-xs text-gray-400 opacity-70">
+                  <ExternalLink className="w-3 h-3" />
+                  <span>{formatUrl(article.link)}</span>
+                </div>
+              </div>
             </div>
           </div>
         </Card>
@@ -97,8 +113,12 @@ const ArticleCard = ({ article, featured = false, onRelatedClick }: ArticleCardP
           <p className="text-gray-600 text-sm mb-3 line-clamp-3">
             {truncateText(article.description, 200)}
           </p>
-          <div className="flex justify-between items-center text-xs text-gray-500">
+          <div className="flex justify-between items-center text-xs text-gray-500 mb-2">
             <span>{formatDate(article.pubDate)}</span>
+          </div>
+          <div className="flex items-center gap-1 text-xs text-muted-foreground opacity-60">
+            <ExternalLink className="w-3 h-3" />
+            <span>{formatUrl(article.link)}</span>
           </div>
         </CardContent>
       </Card>

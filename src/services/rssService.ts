@@ -10,18 +10,47 @@ export interface NewsArticle {
 
 class RSSService {
   private readonly RSS_FEEDS = [
-    'https://rss.app/feeds/tYeOiikyGXfWqnbe.xml',
-    'https://rss.app/feeds/ByNJXo54490NwHzf.xml',
-    'https://rss.app/feeds/s0vj5G7s0NNCwizk.xml',
-    'https://rss.app/feeds/tezEEccrbPGZzPY1.xml',
-    'https://rss.app/feeds/tup0DiNf3fuWjeOx.xml',
-    'https://rss.app/feeds/tjObKSnyEeJJulnM.xml'
+    // Technology
+    'https://techcrunch.com/feed/',
+    'https://www.theverge.com/rss/index.xml',
+    'https://www.wired.com/feed/rss',
+    'https://www.engadget.com/rss.xml',
+    
+    // Business
+    'http://feeds.reuters.com/reuters/businessNews',
+    'https://www.cnbc.com/id/10001147/device/rss/rss.html',
+    'https://www.forbes.com/business/feed/',
+    'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',
+    
+    // Sports
+    'https://www.espn.com/espn/rss/news',
+    'http://feeds.bbci.co.uk/sport/rss.xml?edition=uk',
+    'https://www.si.com/rss/si_topstories.rss',
+    'https://www.skysports.com/rss/12040',
+    
+    // Health
+    'https://www.medicalnewstoday.com/rss',
+    'https://www.webmd.com/rss/news_breaking.xml',
+    'https://www.npr.org/rss/rss.php?id=1128',
+    'https://www.health.com/feed',
+    
+    // Games
+    'https://kotaku.com/rss',
+    'https://www.polygon.com/rss/index.xml',
+    'https://feeds.feedburner.com/IGNAll',
+    'https://www.gamespot.com/feeds/news/',
+    
+    // World News
+    'http://feeds.bbci.co.uk/news/world/rss.xml',
+    'http://rss.cnn.com/rss/edition_world.rss',
+    'https://feeds.a.dj.com/rss/RSSWorldNews.xml',
+    'https://www.aljazeera.com/xml/rss/all.xml'
   ];
   
   private articles: NewsArticle[] = [];
   private lastFetched: number = 0;
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-  private readonly MAX_ARTICLES = 699;
+  private readonly MAX_ARTICLES = 1999;
 
   async fetchArticles(): Promise<NewsArticle[]> {
     const now = Date.now();
@@ -112,7 +141,7 @@ class RSSService {
       // Sort by publication date (newest first)
       mergedArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
       
-      // Keep only the latest 699 articles
+      // Keep only the latest 1999 articles
       this.articles = mergedArticles.slice(0, this.MAX_ARTICLES);
       this.lastFetched = now;
       

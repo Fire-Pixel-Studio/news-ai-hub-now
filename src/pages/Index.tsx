@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { NewsArticle, rssService } from '@/services/rssService';
 import Header from '@/components/Header';
@@ -8,6 +7,7 @@ import TrendingNews from '@/components/TrendingNews';
 import { Button } from '@/components/ui/button';
 import { RefreshCw, ArrowUp } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const Index = () => {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -21,6 +21,7 @@ const Index = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { toast } = useToast();
+  const { theme } = useTheme();
 
   useEffect(() => {
     loadArticles();
@@ -118,6 +119,45 @@ const Index = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const getThemeAnimations = () => {
+    if (theme === 'night-sky' || theme === 'dark' || theme.includes('dark')) {
+      return (
+        <>
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+        </>
+      );
+    }
+    
+    if (theme === 'day-sky') {
+      return <div className="clouds"></div>;
+    }
+    
+    if (theme === 'solar-system') {
+      return <div className="planets"></div>;
+    }
+    
+    if (theme === 'galaxy') {
+      return (
+        <>
+          <div className="stars"></div>
+          <div className="stars2"></div>
+          <div className="stars3"></div>
+          <div className="galaxy-spiral"></div>
+        </>
+      );
+    }
+    
+    return (
+      <>
+        <div className="stars"></div>
+        <div className="stars2"></div>
+        <div className="stars3"></div>
+      </>
+    );
+  };
+
   const featuredArticle = filteredArticles[0];
   const regularArticles = displayedArticles.slice(1);
   const hasMoreArticles = displayedArticles.length < filteredArticles.length;
@@ -125,11 +165,9 @@ const Index = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-background relative overflow-hidden">
-        {/* Starry background */}
+        {/* Animated background */}
         <div className="absolute inset-0 opacity-30">
-          <div className="stars"></div>
-          <div className="stars2"></div>
-          <div className="stars3"></div>
+          {getThemeAnimations()}
         </div>
         
         <Header onSearch={handleSearch} />
@@ -145,11 +183,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Starry background */}
+      {/* Animated background */}
       <div className="absolute inset-0 opacity-30">
-        <div className="stars"></div>
-        <div className="stars2"></div>
-        <div className="stars3"></div>
+        {getThemeAnimations()}
       </div>
       
       <Header onSearch={handleSearch} />
