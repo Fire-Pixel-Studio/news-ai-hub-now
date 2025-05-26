@@ -75,6 +75,8 @@
     --secondary: 268 30% 15%;
     --secondary-foreground: 268 50% 95%;
     --accent: 268 83% 68%;
+    --muted: 268 30% 15%;
+    --muted-foreground: 268 20% 65%;
     --border: 268 30% 18%;
     --input: 268 30% 18%;
   }
@@ -103,8 +105,100 @@
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 95%;
     --accent: 0 0% 85%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
     --border: 0 0% 18%;
     --input: 0 0% 18%;
+  }
+
+  .ocean {
+    --background: 194 100% 97%;
+    --foreground: 194 50% 10%;
+    --card: 194 100% 98%;
+    --card-foreground: 194 50% 10%;
+    --primary: 194 100% 45%;
+    --primary-foreground: 194 100% 98%;
+    --secondary: 194 30% 90%;
+    --secondary-foreground: 194 50% 10%;
+    --accent: 194 100% 45%;
+    --border: 194 30% 85%;
+    --input: 194 30% 85%;
+  }
+
+  .dark-ocean {
+    --background: 210 50% 8%;
+    --foreground: 194 50% 95%;
+    --card: 210 50% 10%;
+    --card-foreground: 194 50% 95%;
+    --primary: 194 100% 55%;
+    --primary-foreground: 210 50% 8%;
+    --secondary: 210 30% 15%;
+    --secondary-foreground: 194 50% 95%;
+    --accent: 194 100% 55%;
+    --muted: 210 30% 15%;
+    --muted-foreground: 194 20% 65%;
+    --border: 210 30% 18%;
+    --input: 210 30% 18%;
+  }
+
+  .sunset {
+    --background: 24 100% 97%;
+    --foreground: 24 50% 10%;
+    --card: 24 100% 98%;
+    --card-foreground: 24 50% 10%;
+    --primary: 330 100% 50%;
+    --primary-foreground: 24 100% 98%;
+    --secondary: 24 30% 90%;
+    --secondary-foreground: 24 50% 10%;
+    --accent: 330 100% 50%;
+    --border: 24 30% 85%;
+    --input: 24 30% 85%;
+  }
+
+  .dark-sunset {
+    --background: 330 50% 8%;
+    --foreground: 24 50% 95%;
+    --card: 330 50% 10%;
+    --card-foreground: 24 50% 95%;
+    --primary: 330 100% 60%;
+    --primary-foreground: 330 50% 8%;
+    --secondary: 330 30% 15%;
+    --secondary-foreground: 24 50% 95%;
+    --accent: 330 100% 60%;
+    --muted: 330 30% 15%;
+    --muted-foreground: 24 20% 65%;
+    --border: 330 30% 18%;
+    --input: 330 30% 18%;
+  }
+
+  .forest {
+    --background: 120 100% 97%;
+    --foreground: 120 50% 10%;
+    --card: 120 100% 98%;
+    --card-foreground: 120 50% 10%;
+    --primary: 120 100% 35%;
+    --primary-foreground: 120 100% 98%;
+    --secondary: 120 30% 90%;
+    --secondary-foreground: 120 50% 10%;
+    --accent: 120 100% 35%;
+    --border: 120 30% 85%;
+    --input: 120 30% 85%;
+  }
+
+  .dark-forest {
+    --background: 120 50% 8%;
+    --foreground: 120 50% 95%;
+    --card: 120 50% 10%;
+    --card-foreground: 120 50% 95%;
+    --primary: 120 100% 45%;
+    --primary-foreground: 120 50% 8%;
+    --secondary: 120 30% 15%;
+    --secondary-foreground: 120 50% 95%;
+    --accent: 120 100% 45%;
+    --muted: 120 30% 15%;
+    --muted-foreground: 120 20% 65%;
+    --border: 120 30% 18%;
+    --input: 120 30% 18%;
   }
 
   .blue {
@@ -193,21 +287,21 @@
 }
 
 /* Dark theme stars */
-.dark .stars {
+.dark .stars, .dark-fancy .stars, .dark-modern .stars, .dark-ocean .stars, .dark-sunset .stars, .dark-forest .stars {
   background: radial-gradient(2px 2px at 20% 30%, rgba(147, 197, 253, 0.8), transparent),
               radial-gradient(2px 2px at 40% 70%, rgba(167, 139, 250, 0.6), transparent),
               radial-gradient(1px 1px at 90% 40%, rgba(196, 181, 253, 0.7), transparent),
               radial-gradient(1px 1px at 50% 50%, rgba(219, 234, 254, 0.5), transparent);
 }
 
-.dark .stars2 {
+.dark .stars2, .dark-fancy .stars2, .dark-modern .stars2, .dark-ocean .stars2, .dark-sunset .stars2, .dark-forest .stars2 {
   background: radial-gradient(1px 1px at 25% 25%, rgba(147, 197, 253, 0.6), transparent),
               radial-gradient(1px 1px at 50% 75%, rgba(167, 139, 250, 0.4), transparent),
               radial-gradient(2px 2px at 75% 25%, rgba(196, 181, 253, 0.5), transparent),
               radial-gradient(1px 1px at 80% 80%, rgba(219, 234, 254, 0.6), transparent);
 }
 
-.dark .stars3 {
+.dark .stars3, .dark-fancy .stars3, .dark-modern .stars3, .dark-ocean .stars3, .dark-sunset .stars3, .dark-forest .stars3 {
   background: radial-gradient(1px 1px at 15% 15%, rgba(147, 197, 253, 0.4), transparent),
               radial-gradient(1px 1px at 35% 35%, rgba(167, 139, 250, 0.3), transparent),
               radial-gradient(1px 1px at 65% 65%, rgba(196, 181, 253, 0.4), transparent),
@@ -239,6 +333,30 @@
     background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 6%) 100%);
   }
 
+  body.ocean {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(194 100% 95%) 100%);
+  }
+
+  body.dark-ocean {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(210 50% 6%) 100%);
+  }
+
+  body.sunset {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(24 100% 95%) 100%);
+  }
+
+  body.dark-sunset {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(330 50% 6%) 100%);
+  }
+
+  body.forest {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(120 100% 95%) 100%);
+  }
+
+  body.dark-forest {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(120 50% 6%) 100%);
+  }
+
   body.blue {
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(214 100% 95%) 100%);
   }
@@ -253,6 +371,25 @@
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair;
+  }
+
+  /* Ensure text visibility in all dark themes */
+  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest {
+    .text-gray-600 {
+      @apply text-muted-foreground;
+    }
+    
+    .text-gray-500 {
+      @apply text-muted-foreground;
+    }
+    
+    .text-gray-300 {
+      @apply text-muted-foreground;
+    }
+    
+    .text-gray-200 {
+      @apply text-card-foreground;
+    }
   }
 }
 

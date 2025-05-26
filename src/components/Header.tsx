@@ -29,6 +29,8 @@ const Header = ({ onSearch }: HeaderProps) => {
     { label: 'Business', href: '/category/Business' },
     { label: 'Sports', href: '/category/Sports' },
     { label: 'Health', href: '/category/Health' },
+    { label: 'Games', href: '/category/Games' },
+    { label: 'World News', href: '/category/World News' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' }
   ];
@@ -46,12 +48,12 @@ const Header = ({ onSearch }: HeaderProps) => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
-                className="text-muted-foreground hover:text-primary transition-colors font-medium"
+                className="text-muted-foreground hover:text-primary transition-colors font-medium text-sm xl:text-base whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -68,7 +70,7 @@ const Header = ({ onSearch }: HeaderProps) => {
                   placeholder="Search news..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 w-64"
+                  className="pl-10 w-48 xl:w-64"
                 />
               </div>
               <Button type="submit" size="sm">

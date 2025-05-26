@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-export type Theme = 'light' | 'dark' | 'light-fancy' | 'dark-fancy' | 'light-modern' | 'dark-modern' | 'blue' | 'purple' | 'green';
+export type Theme = 'light' | 'dark' | 'light-fancy' | 'dark-fancy' | 'light-modern' | 'dark-modern' | 'blue' | 'purple' | 'green' | 'ocean' | 'dark-ocean' | 'sunset' | 'dark-sunset' | 'forest' | 'dark-forest';
 
 interface ThemeContextType {
   theme: Theme;
@@ -28,7 +28,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem('theme', theme);
     
     // Remove all theme classes from both html and body
-    const classList = ['light', 'dark', 'light-fancy', 'dark-fancy', 'light-modern', 'dark-modern', 'blue', 'purple', 'green'];
+    const classList = ['light', 'dark', 'light-fancy', 'dark-fancy', 'light-modern', 'dark-modern', 'blue', 'purple', 'green', 'ocean', 'dark-ocean', 'sunset', 'dark-sunset', 'forest', 'dark-forest'];
     classList.forEach(cls => {
       document.documentElement.classList.remove(cls);
       document.body.classList.remove(cls);
