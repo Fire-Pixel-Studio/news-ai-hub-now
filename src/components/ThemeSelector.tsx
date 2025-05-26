@@ -35,24 +35,41 @@ const themeGroups = [
     ]
   },
   {
-    label: 'Ocean',
+    label: 'Sky & Weather',
+    themes: [
+      { value: 'day-sky' as Theme, label: 'Day Sky', preview: 'bg-gradient-to-r from-blue-400 to-cyan-300 border-blue-300' },
+      { value: 'night-sky' as Theme, label: 'Night Sky', preview: 'bg-gradient-to-r from-indigo-900 to-purple-900 border-indigo-700' },
+      { value: 'afternoon' as Theme, label: 'Afternoon', preview: 'bg-gradient-to-r from-yellow-300 to-orange-400 border-yellow-300' },
+      { value: 'dark-afternoon' as Theme, label: 'Dark Afternoon', preview: 'bg-gradient-to-r from-orange-900 to-red-900 border-orange-700' },
+      { value: 'rainy' as Theme, label: 'Rainy', preview: 'bg-gradient-to-r from-gray-400 to-blue-500 border-gray-400' },
+      { value: 'dark-rainy' as Theme, label: 'Dark Rainy', preview: 'bg-gradient-to-r from-gray-800 to-blue-900 border-gray-700' },
+      { value: 'stormy' as Theme, label: 'Stormy', preview: 'bg-gradient-to-r from-gray-600 to-slate-700 border-gray-500' },
+      { value: 'dark-stormy' as Theme, label: 'Dark Stormy', preview: 'bg-gradient-to-r from-slate-900 to-gray-900 border-slate-800' },
+    ]
+  },
+  {
+    label: 'Space & Cosmic',
+    themes: [
+      { value: 'solar-system' as Theme, label: 'Solar System', preview: 'bg-gradient-to-r from-yellow-500 to-red-600 border-yellow-400' },
+      { value: 'galaxy' as Theme, label: 'Galaxy', preview: 'bg-gradient-to-r from-purple-600 to-pink-600 border-purple-500' },
+    ]
+  },
+  {
+    label: 'Nature',
     themes: [
       { value: 'ocean' as Theme, label: 'Ocean Light', preview: 'bg-gradient-to-r from-cyan-400 to-blue-500 border-cyan-300' },
       { value: 'dark-ocean' as Theme, label: 'Ocean Dark', preview: 'bg-gradient-to-r from-slate-900 to-blue-900 border-slate-700' },
-    ]
-  },
-  {
-    label: 'Sunset',
-    themes: [
       { value: 'sunset' as Theme, label: 'Sunset Light', preview: 'bg-gradient-to-r from-orange-400 to-pink-500 border-orange-300' },
       { value: 'dark-sunset' as Theme, label: 'Sunset Dark', preview: 'bg-gradient-to-r from-gray-900 to-purple-900 border-orange-700' },
+      { value: 'forest' as Theme, label: 'Forest Light', preview: 'bg-gradient-to-r from-green-400 to-emerald-500 border-green-300' },
+      { value: 'dark-forest' as Theme, label: 'Forest Dark', preview: 'bg-gradient-to-r from-gray-900 to-green-900 border-green-700' },
     ]
   },
   {
-    label: 'Forest',
+    label: 'Colorful',
     themes: [
-      { value: 'forest' as Theme, label: 'Forest Light', preview: 'bg-gradient-to-r from-green-400 to-emerald-500 border-green-300' },
-      { value: 'dark-forest' as Theme, label: 'Forest Dark', preview: 'bg-gradient-to-r from-gray-900 to-green-900 border-green-700' },
+      { value: 'rainbow' as Theme, label: 'Rainbow', preview: 'bg-gradient-to-r from-red-400 via-yellow-400 to-blue-400 border-red-300' },
+      { value: 'dark-rainbow' as Theme, label: 'Dark Rainbow', preview: 'bg-gradient-to-r from-red-900 via-purple-900 to-blue-900 border-red-700' },
     ]
   },
   {

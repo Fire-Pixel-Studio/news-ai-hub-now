@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import ArticleCard from '@/components/ArticleCard';
 import TrendingNews from '@/components/TrendingNews';
 import { Button } from '@/components/ui/button';
+import { RefreshCw, ArrowUp } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -14,13 +15,22 @@ const Index = () => {
   const [displayedArticles, setDisplayedArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [articlesPerPage] = useState(200);
+  const [articlesPerPage] = useState(50);
   const [currentPage, setCurrentPage] = useState(1);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     loadArticles();
+    
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 500);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -60,6 +70,31 @@ const Index = () => {
     }
   };
 
+  const refreshArticles = async () => {
+    try {
+      setRefreshing(true);
+      const fetchedArticles = await rssService.fetchArticles();
+      setArticles(fetchedArticles);
+      setFilteredArticles(fetchedArticles);
+      setDisplayedArticles(fetchedArticles.slice(0, articlesPerPage));
+      setCurrentPage(1);
+      
+      toast({
+        title: "News Refreshed",
+        description: `Updated with ${fetchedArticles.length} articles.`,
+      });
+    } catch (error) {
+      console.error('Error refreshing articles:', error);
+      toast({
+        title: "Error",
+        description: "Failed to refresh news articles. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
   const loadMoreArticles = () => {
     setLoadingMore(true);
     
@@ -77,6 +112,10 @@ const Index = () => {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const featuredArticle = filteredArticles[0];
@@ -119,12 +158,22 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-3">
-            {/* Article Count */}
-            <div className="mb-4">
+            {/* Article Count & Refresh */}
+            <div className="mb-4 flex justify-between items-center">
               <p className="text-sm text-muted-foreground">
                 Total articles: <span className="font-semibold text-foreground">{filteredArticles.length}</span>
                 {searchQuery && ` (filtered for "${searchQuery}")`}
               </p>
+              <Button
+                onClick={refreshArticles}
+                disabled={refreshing}
+                size="sm"
+                variant="outline"
+                className="gap-2"
+              >
+                <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
             </div>
 
             {/* Search Results Header */}
@@ -196,6 +245,17 @@ const Index = () => {
           </div>
         </div>
       </main>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <Button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 z-50 rounded-full w-12 h-12 p-0 shadow-lg"
+          size="sm"
+        >
+          <ArrowUp className="w-5 h-5" />
+        </Button>
+      )}
 
       <Footer />
     </div>

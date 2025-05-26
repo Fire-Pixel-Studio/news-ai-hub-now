@@ -51,6 +51,8 @@
     --ring: 212.7 26.8% 83.9%;
   }
 
+  /* ... keep existing code (light-fancy, dark-fancy, light-modern, dark-modern, ocean, dark-ocean, sunset, dark-sunset, forest, dark-forest themes) */
+
   .light-fancy {
     --background: 214 100% 98%;
     --foreground: 222.2 84% 4.9%;
@@ -201,6 +203,201 @@
     --input: 120 30% 18%;
   }
 
+  /* New Themes */
+  .day-sky {
+    --background: 195 100% 95%;
+    --foreground: 195 50% 10%;
+    --card: 195 100% 98%;
+    --card-foreground: 195 50% 10%;
+    --primary: 195 100% 50%;
+    --primary-foreground: 195 100% 98%;
+    --secondary: 195 30% 90%;
+    --secondary-foreground: 195 50% 10%;
+    --accent: 195 100% 50%;
+    --muted: 195 30% 88%;
+    --muted-foreground: 195 20% 45%;
+    --border: 195 30% 85%;
+    --input: 195 30% 85%;
+  }
+
+  .night-sky {
+    --background: 240 50% 8%;
+    --foreground: 240 50% 95%;
+    --card: 240 50% 10%;
+    --card-foreground: 240 50% 95%;
+    --primary: 240 100% 60%;
+    --primary-foreground: 240 50% 8%;
+    --secondary: 240 30% 15%;
+    --secondary-foreground: 240 50% 95%;
+    --accent: 240 100% 60%;
+    --muted: 240 30% 15%;
+    --muted-foreground: 240 20% 65%;
+    --border: 240 30% 18%;
+    --input: 240 30% 18%;
+  }
+
+  .solar-system {
+    --background: 45 100% 95%;
+    --foreground: 45 50% 10%;
+    --card: 45 100% 98%;
+    --card-foreground: 45 50% 10%;
+    --primary: 15 100% 50%;
+    --primary-foreground: 45 100% 98%;
+    --secondary: 45 30% 90%;
+    --secondary-foreground: 45 50% 10%;
+    --accent: 15 100% 50%;
+    --muted: 45 30% 88%;
+    --muted-foreground: 45 20% 45%;
+    --border: 45 30% 85%;
+    --input: 45 30% 85%;
+  }
+
+  .galaxy {
+    --background: 270 50% 8%;
+    --foreground: 270 50% 95%;
+    --card: 270 50% 10%;
+    --card-foreground: 270 50% 95%;
+    --primary: 315 100% 60%;
+    --primary-foreground: 270 50% 8%;
+    --secondary: 270 30% 15%;
+    --secondary-foreground: 270 50% 95%;
+    --accent: 315 100% 60%;
+    --muted: 270 30% 15%;
+    --muted-foreground: 270 20% 65%;
+    --border: 270 30% 18%;
+    --input: 270 30% 18%;
+  }
+
+  .rainbow {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 5%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 5%;
+    --primary: 215 100% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 15%;
+    --accent: 215 100% 50%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 45%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+  }
+
+  .dark-rainbow {
+    --background: 0 0% 8%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 95%;
+    --primary: 215 100% 60%;
+    --primary-foreground: 0 0% 8%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --accent: 215 100% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+  }
+
+  .afternoon {
+    --background: 35 100% 95%;
+    --foreground: 35 50% 10%;
+    --card: 35 100% 98%;
+    --card-foreground: 35 50% 10%;
+    --primary: 25 100% 50%;
+    --primary-foreground: 35 100% 98%;
+    --secondary: 35 30% 90%;
+    --secondary-foreground: 35 50% 10%;
+    --accent: 25 100% 50%;
+    --muted: 35 30% 88%;
+    --muted-foreground: 35 20% 45%;
+    --border: 35 30% 85%;
+    --input: 35 30% 85%;
+  }
+
+  .dark-afternoon {
+    --background: 15 50% 8%;
+    --foreground: 35 50% 95%;
+    --card: 15 50% 10%;
+    --card-foreground: 35 50% 95%;
+    --primary: 25 100% 60%;
+    --primary-foreground: 15 50% 8%;
+    --secondary: 15 30% 15%;
+    --secondary-foreground: 35 50% 95%;
+    --accent: 25 100% 60%;
+    --muted: 15 30% 15%;
+    --muted-foreground: 35 20% 65%;
+    --border: 15 30% 18%;
+    --input: 15 30% 18%;
+  }
+
+  .rainy {
+    --background: 200 30% 92%;
+    --foreground: 200 50% 10%;
+    --card: 200 30% 96%;
+    --card-foreground: 200 50% 10%;
+    --primary: 200 70% 45%;
+    --primary-foreground: 200 30% 96%;
+    --secondary: 200 20% 88%;
+    --secondary-foreground: 200 50% 10%;
+    --accent: 200 70% 45%;
+    --muted: 200 20% 88%;
+    --muted-foreground: 200 20% 45%;
+    --border: 200 20% 82%;
+    --input: 200 20% 82%;
+  }
+
+  .dark-rainy {
+    --background: 200 30% 8%;
+    --foreground: 200 30% 95%;
+    --card: 200 30% 10%;
+    --card-foreground: 200 30% 95%;
+    --primary: 200 70% 55%;
+    --primary-foreground: 200 30% 8%;
+    --secondary: 200 20% 15%;
+    --secondary-foreground: 200 30% 95%;
+    --accent: 200 70% 55%;
+    --muted: 200 20% 15%;
+    --muted-foreground: 200 20% 65%;
+    --border: 200 20% 18%;
+    --input: 200 20% 18%;
+  }
+
+  .stormy {
+    --background: 210 20% 88%;
+    --foreground: 210 50% 10%;
+    --card: 210 20% 92%;
+    --card-foreground: 210 50% 10%;
+    --primary: 210 60% 40%;
+    --primary-foreground: 210 20% 92%;
+    --secondary: 210 15% 85%;
+    --secondary-foreground: 210 50% 10%;
+    --accent: 210 60% 40%;
+    --muted: 210 15% 85%;
+    --muted-foreground: 210 20% 45%;
+    --border: 210 15% 78%;
+    --input: 210 15% 78%;
+  }
+
+  .dark-stormy {
+    --background: 210 30% 6%;
+    --foreground: 210 30% 95%;
+    --card: 210 30% 8%;
+    --card-foreground: 210 30% 95%;
+    --primary: 210 60% 55%;
+    --primary-foreground: 210 30% 6%;
+    --secondary: 210 20% 12%;
+    --secondary-foreground: 210 30% 95%;
+    --accent: 210 60% 55%;
+    --muted: 210 20% 12%;
+    --muted-foreground: 210 20% 65%;
+    --border: 210 20% 15%;
+    --input: 210 20% 15%;
+  }
+
+  /* ... keep existing code (blue, purple, green themes) */
+
   .blue {
     --background: 214 100% 97%;
     --foreground: 214 50% 10%;
@@ -244,6 +441,8 @@
   }
 }
 
+/* ... keep existing code (starry background animation) */
+
 /* Starry background animation */
 .stars, .stars2, .stars3 {
   position: absolute;
@@ -286,22 +485,22 @@
   100% { transform: translateY(-100vh); }
 }
 
-/* Dark theme stars */
-.dark .stars, .dark-fancy .stars, .dark-modern .stars, .dark-ocean .stars, .dark-sunset .stars, .dark-forest .stars {
+/* Enhanced Dark theme stars for all dark themes */
+.dark .stars, .dark-fancy .stars, .dark-modern .stars, .dark-ocean .stars, .dark-sunset .stars, .dark-forest .stars, .night-sky .stars, .galaxy .stars, .dark-rainbow .stars, .dark-afternoon .stars, .dark-rainy .stars, .dark-stormy .stars {
   background: radial-gradient(2px 2px at 20% 30%, rgba(147, 197, 253, 0.8), transparent),
               radial-gradient(2px 2px at 40% 70%, rgba(167, 139, 250, 0.6), transparent),
               radial-gradient(1px 1px at 90% 40%, rgba(196, 181, 253, 0.7), transparent),
               radial-gradient(1px 1px at 50% 50%, rgba(219, 234, 254, 0.5), transparent);
 }
 
-.dark .stars2, .dark-fancy .stars2, .dark-modern .stars2, .dark-ocean .stars2, .dark-sunset .stars2, .dark-forest .stars2 {
+.dark .stars2, .dark-fancy .stars2, .dark-modern .stars2, .dark-ocean .stars2, .dark-sunset .stars2, .dark-forest .stars2, .night-sky .stars2, .galaxy .stars2, .dark-rainbow .stars2, .dark-afternoon .stars2, .dark-rainy .stars2, .dark-stormy .stars2 {
   background: radial-gradient(1px 1px at 25% 25%, rgba(147, 197, 253, 0.6), transparent),
               radial-gradient(1px 1px at 50% 75%, rgba(167, 139, 250, 0.4), transparent),
               radial-gradient(2px 2px at 75% 25%, rgba(196, 181, 253, 0.5), transparent),
               radial-gradient(1px 1px at 80% 80%, rgba(219, 234, 254, 0.6), transparent);
 }
 
-.dark .stars3, .dark-fancy .stars3, .dark-modern .stars3, .dark-ocean .stars3, .dark-sunset .stars3, .dark-forest .stars3 {
+.dark .stars3, .dark-fancy .stars3, .dark-modern .stars3, .dark-ocean .stars3, .dark-sunset .stars3, .dark-forest .stars3, .night-sky .stars3, .galaxy .stars3, .dark-rainbow .stars3, .dark-afternoon .stars3, .dark-rainy .stars3, .dark-stormy .stars3 {
   background: radial-gradient(1px 1px at 15% 15%, rgba(147, 197, 253, 0.4), transparent),
               radial-gradient(1px 1px at 35% 35%, rgba(167, 139, 250, 0.3), transparent),
               radial-gradient(1px 1px at 65% 65%, rgba(196, 181, 253, 0.4), transparent),
@@ -317,6 +516,7 @@
     @apply bg-background text-foreground font-inter transition-colors duration-300;
   }
 
+  /* Enhanced theme backgrounds */
   body.light-fancy {
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(214 100% 96%) 100%);
   }
@@ -357,6 +557,68 @@
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(120 50% 6%) 100%);
   }
 
+  body.day-sky {
+    background: linear-gradient(180deg, hsl(195 100% 85%) 0%, hsl(195 100% 95%) 50%, hsl(195 100% 98%) 100%);
+  }
+
+  body.night-sky {
+    background: linear-gradient(180deg, hsl(240 50% 4%) 0%, hsl(240 50% 8%) 50%, hsl(240 50% 12%) 100%);
+  }
+
+  body.solar-system {
+    background: radial-gradient(circle at 20% 30%, hsl(15 100% 60%) 0%, hsl(45 100% 80%) 40%, hsl(45 100% 95%) 100%);
+  }
+
+  body.galaxy {
+    background: radial-gradient(ellipse at center, hsl(315 100% 20%) 0%, hsl(270 50% 8%) 40%, hsl(270 50% 4%) 100%);
+  }
+
+  body.rainbow {
+    background: linear-gradient(45deg, 
+      hsl(0 100% 95%) 0%, 
+      hsl(60 100% 95%) 16.66%, 
+      hsl(120 100% 95%) 33.33%, 
+      hsl(180 100% 95%) 50%, 
+      hsl(240 100% 95%) 66.66%, 
+      hsl(300 100% 95%) 83.33%, 
+      hsl(360 100% 95%) 100%);
+  }
+
+  body.dark-rainbow {
+    background: linear-gradient(45deg, 
+      hsl(0 50% 10%) 0%, 
+      hsl(60 50% 10%) 16.66%, 
+      hsl(120 50% 10%) 33.33%, 
+      hsl(180 50% 10%) 50%, 
+      hsl(240 50% 10%) 66.66%, 
+      hsl(300 50% 10%) 83.33%, 
+      hsl(360 50% 10%) 100%);
+  }
+
+  body.afternoon {
+    background: linear-gradient(180deg, hsl(35 100% 80%) 0%, hsl(35 100% 90%) 50%, hsl(35 100% 95%) 100%);
+  }
+
+  body.dark-afternoon {
+    background: linear-gradient(180deg, hsl(15 50% 6%) 0%, hsl(15 50% 8%) 50%, hsl(15 50% 12%) 100%);
+  }
+
+  body.rainy {
+    background: linear-gradient(180deg, hsl(200 30% 85%) 0%, hsl(200 30% 92%) 100%);
+  }
+
+  body.dark-rainy {
+    background: linear-gradient(180deg, hsl(200 30% 6%) 0%, hsl(200 30% 8%) 100%);
+  }
+
+  body.stormy {
+    background: linear-gradient(180deg, hsl(210 20% 80%) 0%, hsl(210 20% 88%) 100%);
+  }
+
+  body.dark-stormy {
+    background: linear-gradient(180deg, hsl(210 30% 4%) 0%, hsl(210 30% 6%) 100%);
+  }
+
   body.blue {
     background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(214 100% 95%) 100%);
   }
@@ -373,8 +635,8 @@
     @apply font-playfair;
   }
 
-  /* Ensure text visibility in all dark themes */
-  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest {
+  /* Enhanced text visibility in all dark themes */
+  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy {
     .text-gray-600 {
       @apply text-muted-foreground;
     }
@@ -383,12 +645,29 @@
       @apply text-muted-foreground;
     }
     
-    .text-gray-300 {
+    .text-gray-400 {
       @apply text-muted-foreground;
+    }
+    
+    .text-gray-300 {
+      @apply text-card-foreground;
     }
     
     .text-gray-200 {
       @apply text-card-foreground;
+    }
+
+    /* Force white text for better visibility */
+    * {
+      color: hsl(var(--foreground)) !important;
+    }
+
+    .text-muted-foreground {
+      color: hsl(var(--muted-foreground)) !important;
+    }
+
+    .text-primary {
+      color: hsl(var(--primary)) !important;
     }
   }
 }

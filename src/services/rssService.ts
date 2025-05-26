@@ -1,4 +1,3 @@
-
 export interface NewsArticle {
   id: string;
   title: string;
@@ -22,6 +21,7 @@ class RSSService {
   private articles: NewsArticle[] = [];
   private lastFetched: number = 0;
   private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+  private readonly MAX_ARTICLES = 699;
 
   async fetchArticles(): Promise<NewsArticle[]> {
     const now = Date.now();
@@ -72,7 +72,10 @@ class RSSService {
                 'photo-1586953208448-b95a79798f07',
                 'photo-1495020689067-958852a7765e',
                 'photo-1594736797933-d0e501ba2fe6',
-                'photo-1507003211169-0a1dd7228f2d'
+                'photo-1507003211169-0a1dd7228f2d',
+                'photo-1518709268805-4e9042af2176',
+                'photo-1569163139394-de4e5f43e4e3',
+                'photo-1559757148-5c350d0d3c56'
               ];
               const randomImage = newsImages[(index + allArticles.length) % newsImages.length];
               image = `https://images.unsplash.com/${randomImage}?w=800&h=400&fit=crop`;
@@ -80,7 +83,6 @@ class RSSService {
             
             const category = this.inferCategory(title + ' ' + description);
             
-            // Get the base content from RSS
             const baseContent = this.stripHtml(description);
             
             return {
@@ -100,12 +102,21 @@ class RSSService {
         }
       }
       
-      // Sort by publication date (newest first)
-      allArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+      // Merge with existing articles to maintain history
+      const existingArticles = this.articles.filter(article => 
+        !allArticles.some(newArticle => newArticle.link === article.link)
+      );
       
-      this.articles = allArticles;
+      const mergedArticles = [...allArticles, ...existingArticles];
+      
+      // Sort by publication date (newest first)
+      mergedArticles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+      
+      // Keep only the latest 699 articles
+      this.articles = mergedArticles.slice(0, this.MAX_ARTICLES);
       this.lastFetched = now;
-      console.log(`Successfully fetched ${this.articles.length} articles from ${this.RSS_FEEDS.length} feeds`);
+      
+      console.log(`Successfully managed ${this.articles.length} articles (max: ${this.MAX_ARTICLES})`);
       return this.articles;
       
     } catch (error) {
