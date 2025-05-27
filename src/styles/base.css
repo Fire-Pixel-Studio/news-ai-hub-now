@@ -1,10 +1,4 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   * {
     @apply border-border;
@@ -19,7 +13,7 @@
   }
 
   /* Force correct text colors in all dark themes */
-  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy, .neon-city, .dark-neon-city, .dark-autumn, .dark-winter, .dark-volcanic, .dark-cyberpunk, .dark-tropical {
+  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy, .neon-city, .dark-neon-city, .dark-autumn, .dark-winter, .dark-volcanic, .dark-cyberpunk, .dark-tropical, .dark-aurora, .dark-desert, .dark-cosmic, .dark-mystic, .dark-electric, .dark-vintage, .dark-glacial, .dark-fire, .dark-zen, .dark-toxic {
     * {
       color: hsl(var(--foreground)) !important;
     }
