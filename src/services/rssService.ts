@@ -10,121 +10,48 @@ export interface NewsArticle {
 
 class RSSService {
   private readonly RSS_FEEDS = [
-    // Technology
+    // Technology (Working feeds only)
     'https://techcrunch.com/feed/',
     'https://www.theverge.com/rss/index.xml',
     'https://www.wired.com/feed/rss',
     'https://www.engadget.com/rss.xml',
     
-    // Business (20 Feeds)
+    // Business (Reduced to working feeds)
     'https://www.cnbc.com/id/10001147/device/rss/rss.html',
-    'https://www.forbes.com/business/feed/',
-    'http://feeds.reuters.com/reuters/businessNews',
-    'https://www.ft.com/?format=rss',
-    'https://www.bloomberg.com/feed/podcast/etf-report.xml',
-    'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',
     'https://www.businessinsider.com/rss',
     'https://www.marketwatch.com/rss/topstories',
-    'https://hbr.org/rss',
-    'https://www.economist.com/latest/rss.xml',
-    'https://www.inc.com/rss',
-    'https://www.entrepreneur.com/rss',
-    'https://www.fastcompany.com/rss',
-    'https://smallbiztrends.com/feed',
-    'https://www.investopedia.com/feedbuilder/feed',
     'https://finance.yahoo.com/news/rssindex',
-    'https://seekingalpha.com/feed.xml',
-    'https://www.morningstar.com/rss',
-    'https://www.kiplinger.com/rss',
     'https://www.npr.org/rss/rss.php?id=1006',
     
-    // Sports (20 Feeds)
+    // Sports (Reduced to working feeds)
     'https://www.espn.com/espn/rss/news',
-    'http://feeds.bbci.co.uk/sport/rss.xml?edition=uk',
     'https://www.si.com/rss/si_topstories.rss',
-    'https://www.skysports.com/rss/12040',
     'https://www.cbssports.com/xml/rss',
-    'https://www.foxsports.com/rss-feeds',
-    'https://bleacherreport.com/articles/feed',
-    'https://scores.nbcsports.com/rss/headlines.asp',
     'https://sports.yahoo.com/rss/',
-    'https://theathletic.com/rss',
-    'https://deadspin.com/rss',
-    'https://www.sportingnews.com/us/rss',
     'https://rssfeeds.usatoday.com/UsatodaycomSports-TopStories',
     'https://www.npr.org/rss/rss.php?id=1055',
-    'https://www.sbnation.com/rss/index.xml',
-    'https://www.goal.com/en-us/feeds/news?fmt=rss',
-    'https://www.mlb.com/feeds/news/rss.xml',
-    'https://www.nba.com/rss/nba_rss.xml',
-    'https://www.nfl.com/rss/rsslanding?searchString=home',
-    'https://www.nhl.com/rss/news.xml',
     
-    // Health (20 Feeds)
+    // Health (Reduced to working feeds)
     'https://www.medicalnewstoday.com/rss',
     'https://www.webmd.com/rss/news_breaking.xml',
     'https://www.npr.org/rss/rss.php?id=1128',
     'https://www.health.com/feed',
-    'https://www.medicinenet.com/rss_feeds_and_news_syndication/info.htm',
     'https://www.sciencedaily.com/rss/health_medicine.xml',
     'https://newsnetwork.mayoclinic.org/feed/',
-    'https://tools.cdc.gov/api/v2/resources/media/403372.rss',
-    'https://www.who.int/feeds/entity/mediacentre/news/en/rss.xml',
-    'https://www.nih.gov/news-events/news-releases/rss.xml',
-    'https://www.health.harvard.edu/blog/feed',
-    'https://www.hopkinsmedicine.org/news/rss',
-    'https://health.clevelandclinic.org/feed/',
-    'https://www.everydayhealth.com/rss.xml',
-    'https://www.psychologytoday.com/us/rss',
-    'https://medicalxpress.com/rss-feed/',
-    'https://www.healthline.com/rss',
-    'https://pubmed.ncbi.nlm.nih.gov/rss/',
-    'https://www.medscape.com/rss/public',
-    'https://khn.org/rss/',
     
-    // Games (20 Feeds)
-    'https://kotaku.com/rss',
+    // Games (Reduced to working feeds)  
     'https://www.polygon.com/rss/index.xml',
-    'https://feeds.feedburner.com/IGNAll',
     'https://www.gamespot.com/feeds/news/',
     'https://www.pcgamer.com/rss/',
-    'https://www.eurogamer.net/?format=rss',
-    'https://www.rockpapershotgun.com/feed',
-    'https://www.destructoid.com/rss.xml',
-    'https://www.gameinformer.com/rss.xml',
     'https://www.nintendolife.com/feeds/news',
-    'https://blog.us.playstation.com/feed/',
-    'https://news.xbox.com/en-us/feed/',
-    'https://store.steampowered.com/feeds/news.xml',
-    'https://www.gamasutra.com/rss/',
-    'https://www.metacritic.com/rss/games',
     'https://gamerant.com/feed/',
-    'https://www.vg247.com/feed/',
-    'https://www.gamerevolution.com/feed',
-    'https://www.gamezone.com/feed/',
-    'https://www.hardcoregamer.com/feed/',
     
-    // World News (20 Feeds)
-    'http://feeds.bbci.co.uk/news/world/rss.xml',
-    'http://rss.cnn.com/rss/edition_world.rss',
+    // World News (Reduced to working feeds)
     'https://www.theguardian.com/world/rss',
-    'https://www.aljazeera.com/xml/rss/all.xml',
-    'http://feeds.reuters.com/Reuters/worldNews',
     'https://www.npr.org/rss/rss.php?id=1004',
     'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
-    'http://feeds.washingtonpost.com/rss/world',
-    'https://rss.dw.com/rdf/rss-en-all',
     'https://www.france24.com/en/rss',
-    'https://www.voanews.com/rss',
-    'https://abcnews.go.com/abcnews/internationalheadlines',
-    'https://www.cbc.ca/cmlink/rss-world',
-    'https://feeds.skynews.com/feeds/rss/world.xml',
-    'https://www.thetimes.co.uk/world/rss',
-    'https://www.telegraph.co.uk/news/worldnews/rss.xml',
-    'https://time.com/feed/',
-    'https://www.bloomberg.com/feed/podcast/world-news.xml',
-    'https://www.ft.com/world?format=rss',
-    'https://www.economist.com/international/rss.xml'
+    'https://time.com/feed/'
   ];
   
   private articles: NewsArticle[] = [];
@@ -176,17 +103,30 @@ class RSSService {
             
             let image = this.extractImageFromDescription(description);
             if (!image) {
+              // Use a more diverse set of high-quality images
               const newsImages = [
-                'photo-1504711434969-e33886168f5c',
-                'photo-1586953208448-b95a79798f07',
-                'photo-1495020689067-958852a7765e',
-                'photo-1594736797933-d0e501ba2fe6',
-                'photo-1507003211169-0a1dd7228f2d',
-                'photo-1518709268805-4e9042af2176',
-                'photo-1569163139394-de4e5f43e4e3',
-                'photo-1559757148-5c350d0d3c56'
+                'photo-1504711434969-e33886168f5c', // newspaper
+                'photo-1586953208448-b95a79798f07', // business meeting
+                'photo-1495020689067-958852a7765e', // newspaper stack
+                'photo-1594736797933-d0e501ba2fe6', // typing
+                'photo-1507003211169-0a1dd7228f2d', // laptop news
+                'photo-1518709268805-4e9042af2176', // technology
+                'photo-1569163139394-de4e5f43e4e3', // breaking news
+                'photo-1559757148-5c350d0d3c56', // medical
+                'photo-1571019613454-1cb2f99b2d8b', // sports stadium
+                'photo-1560472355-536de3962603', // business chart
+                'photo-1581833971358-2c8b550f87b3', // world globe
+                'photo-1522202176988-66273c2fd55f', // gaming setup
+                'photo-1551434678-e076c223a692', // business team
+                'photo-1519389950473-47ba0277781c', // technology workspace
+                'photo-1434030216411-0b793f4b4173', // conference
+                'photo-1563013544-824ae1b704d3', // health and wellness
+                'photo-1552664730-d307ca884978', // sports action
+                'photo-1590935216405-65082d4c0f05', // gaming controller
+                'photo-1444653389962-8149286c578a', // world news
+                'photo-1573164713714-d95e436ab8d6' // technology innovation
               ];
-              const randomImage = newsImages[(index + allArticles.length) % newsImages.length];
+              const randomImage = newsImages[(allArticles.length + index) % newsImages.length];
               image = `https://images.unsplash.com/${randomImage}?w=800&h=400&fit=crop`;
             }
             
