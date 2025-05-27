@@ -1,0 +1,165 @@
+
+@layer base {
+  /* Enhanced theme backgrounds */
+  body.light-fancy {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(214 100% 96%) 100%);
+  }
+
+  body.dark-fancy {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(268 50% 6%) 100%);
+  }
+
+  body.light-modern {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 96%) 100%);
+  }
+
+  body.dark-modern {
+    background: linear-gradient(180deg, hsl(var(--background)) 0%, hsl(0 0% 6%) 100%);
+  }
+
+  body.ocean {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(194 100% 95%) 100%);
+  }
+
+  body.dark-ocean {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(210 50% 6%) 100%);
+  }
+
+  body.sunset {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(24 100% 95%) 100%);
+  }
+
+  body.dark-sunset {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(330 50% 6%) 100%);
+  }
+
+  body.forest {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(120 100% 95%) 100%);
+  }
+
+  body.dark-forest {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(120 50% 6%) 100%);
+  }
+
+  body.day-sky {
+    background: linear-gradient(180deg, hsl(195 100% 85%) 0%, hsl(195 100% 95%) 50%, hsl(195 100% 98%) 100%);
+  }
+
+  body.night-sky {
+    background: linear-gradient(180deg, hsl(240 50% 4%) 0%, hsl(240 50% 8%) 50%, hsl(240 50% 12%) 100%);
+  }
+
+  body.solar-system {
+    background: radial-gradient(circle at 20% 30%, hsl(15 100% 60%) 0%, hsl(45 100% 80%) 40%, hsl(45 100% 95%) 100%);
+  }
+
+  body.galaxy {
+    background: radial-gradient(ellipse at center, hsl(315 100% 20%) 0%, hsl(270 50% 8%) 40%, hsl(270 50% 4%) 100%);
+  }
+
+  body.rainbow {
+    background: linear-gradient(45deg, 
+      hsl(0 100% 95%) 0%, 
+      hsl(60 100% 95%) 16.66%, 
+      hsl(120 100% 95%) 33.33%, 
+      hsl(180 100% 95%) 50%, 
+      hsl(240 100% 95%) 66.66%, 
+      hsl(300 100% 95%) 83.33%, 
+      hsl(360 100% 95%) 100%);
+  }
+
+  body.dark-rainbow {
+    background: linear-gradient(45deg, 
+      hsl(0 50% 10%) 0%, 
+      hsl(60 50% 10%) 16.66%, 
+      hsl(120 50% 10%) 33.33%, 
+      hsl(180 50% 10%) 50%, 
+      hsl(240 50% 10%) 66.66%, 
+      hsl(300 50% 10%) 83.33%, 
+      hsl(360 50% 10%) 100%);
+  }
+
+  body.afternoon {
+    background: linear-gradient(180deg, hsl(35 100% 80%) 0%, hsl(35 100% 90%) 50%, hsl(35 100% 95%) 100%);
+  }
+
+  body.dark-afternoon {
+    background: linear-gradient(180deg, hsl(15 50% 6%) 0%, hsl(15 50% 8%) 50%, hsl(15 50% 12%) 100%);
+  }
+
+  body.rainy {
+    background: linear-gradient(180deg, hsl(200 30% 85%) 0%, hsl(200 30% 92%) 100%);
+  }
+
+  body.dark-rainy {
+    background: linear-gradient(180deg, hsl(200 30% 6%) 0%, hsl(200 30% 8%) 100%);
+  }
+
+  body.stormy {
+    background: linear-gradient(180deg, hsl(210 20% 80%) 0%, hsl(210 20% 88%) 100%);
+  }
+
+  body.dark-stormy {
+    background: linear-gradient(180deg, hsl(210 30% 4%) 0%, hsl(210 30% 6%) 100%);
+  }
+
+  body.blue {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(214 100% 95%) 100%);
+  }
+
+  body.purple {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(270 100% 95%) 100%);
+  }
+
+  body.green {
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(120 100% 95%) 100%);
+  }
+
+  body.neon-city {
+    background: linear-gradient(135deg, hsl(315 100% 95%) 0%, hsl(180 100% 95%) 100%);
+  }
+
+  body.dark-neon-city {
+    background: linear-gradient(135deg, hsl(315 50% 8%) 0%, hsl(180 50% 8%) 100%);
+  }
+
+  body.autumn {
+    background: linear-gradient(135deg, hsl(25 100% 90%) 0%, hsl(10 100% 85%) 100%);
+  }
+
+  body.dark-autumn {
+    background: linear-gradient(135deg, hsl(25 50% 8%) 0%, hsl(10 50% 6%) 100%);
+  }
+
+  body.winter {
+    background: linear-gradient(180deg, hsl(190 100% 90%) 0%, hsl(210 100% 95%) 100%);
+  }
+
+  body.dark-winter {
+    background: linear-gradient(180deg, hsl(190 50% 8%) 0%, hsl(210 50% 6%) 100%);
+  }
+
+  body.volcanic {
+    background: radial-gradient(circle at 50% 100%, hsl(0 100% 60%) 0%, hsl(15 100% 70%) 30%, hsl(0 100% 95%) 100%);
+  }
+
+  body.dark-volcanic {
+    background: radial-gradient(circle at 50% 100%, hsl(0 50% 15%) 0%, hsl(15 50% 10%) 30%, hsl(0 50% 8%) 100%);
+  }
+
+  body.cyberpunk {
+    background: linear-gradient(135deg, hsl(300 100% 95%) 0%, hsl(270 100% 90%) 50%, hsl(315 100% 95%) 100%);
+  }
+
+  body.dark-cyberpunk {
+    background: linear-gradient(135deg, hsl(300 50% 8%) 0%, hsl(270 50% 6%) 50%, hsl(315 50% 8%) 100%);
+  }
+
+  body.tropical {
+    background: linear-gradient(135deg, hsl(165 100% 90%) 0%, hsl(140 100% 85%) 50%, hsl(180 100% 90%) 100%);
+  }
+
+  body.dark-tropical {
+    background: linear-gradient(135deg, hsl(165 50% 8%) 0%, hsl(140 50% 6%) 50%, hsl(180 50% 8%) 100%);
+  }
+}

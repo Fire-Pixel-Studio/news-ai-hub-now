@@ -1,0 +1,53 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter transition-colors duration-300;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-playfair;
+  }
+
+  /* Force correct text colors in all dark themes */
+  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy, .neon-city, .dark-neon-city, .dark-autumn, .dark-winter, .dark-volcanic, .dark-cyberpunk, .dark-tropical {
+    * {
+      color: hsl(var(--foreground)) !important;
+    }
+
+    .text-muted-foreground {
+      color: hsl(var(--muted-foreground)) !important;
+    }
+
+    .text-primary {
+      color: hsl(var(--primary)) !important;
+    }
+
+    .text-gray-600, .text-gray-500, .text-gray-400 {
+      color: hsl(var(--muted-foreground)) !important;
+    }
+
+    .text-gray-300, .text-gray-200 {
+      color: hsl(var(--card-foreground)) !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+}
