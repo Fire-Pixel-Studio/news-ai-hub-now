@@ -13,7 +13,9 @@
   }
 
   /* Force correct text colors in all dark themes */
-  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy, .neon-city, .dark-neon-city, .dark-autumn, .dark-winter, .dark-volcanic, .dark-cyberpunk, .dark-tropical, .dark-aurora, .dark-desert, .dark-cosmic, .dark-mystic, .dark-electric, .dark-vintage, .dark-glacial, .dark-fire, .dark-zen, .dark-toxic {
+  .dark, .dark-fancy, .dark-modern, .dark-ocean, .dark-sunset, .dark-forest, .night-sky, .galaxy, .dark-rainbow, .dark-afternoon, .dark-rainy, .dark-stormy, .dark-neon-city, .dark-autumn, .dark-winter, .dark-volcanic, .dark-cyberpunk, .dark-tropical, .dark-aurora, .dark-desert, .dark-cosmic, .dark-mystic, .dark-electric, .dark-vintage, .dark-glacial, .dark-fire, .dark-zen, .dark-toxic {
+    color: hsl(var(--foreground)) !important;
+
     * {
       color: hsl(var(--foreground)) !important;
     }
@@ -32,6 +34,26 @@
 
     .text-gray-300, .text-gray-200 {
       color: hsl(var(--card-foreground)) !important;
+    }
+
+    /* Ensure buttons and cards have proper colors */
+    .bg-card {
+      background-color: hsl(var(--card)) !important;
+      color: hsl(var(--card-foreground)) !important;
+    }
+
+    .bg-background {
+      background-color: hsl(var(--background)) !important;
+      color: hsl(var(--foreground)) !important;
+    }
+  }
+
+  /* Ensure light themes also work properly */
+  .light, .light-fancy, .light-modern, .ocean, .sunset, .forest, .day-sky, .solar-system, .rainbow, .afternoon, .rainy, .stormy, .neon-city, .autumn, .winter, .volcanic, .cyberpunk, .tropical, .aurora, .desert, .cosmic, .mystic, .electric, .vintage, .glacial, .fire, .zen, .toxic {
+    color: hsl(var(--foreground));
+
+    * {
+      color: inherit;
     }
   }
 }
